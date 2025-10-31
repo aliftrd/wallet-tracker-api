@@ -26,12 +26,15 @@ class UserForm
                             ->required(),
                         TextInput::make('password')
                             ->password()
-                            ->required(),
+                            ->required(fn(string $operation): bool => $operation === 'create')
+                            ->dehydrated(fn($state) => filled($state))
+                            ->dehydrateStateUsing(fn($state) => filled($state) ? bcrypt($state) : null),
                         Select::make('roles')
                             ->relationship('roles', 'name')
                             ->getOptionLabelFromRecordUsing(fn(Role $record) => Str::headline($record->name))
                             ->multiple()
                             ->preload()
+                            ->required()
                             ->searchable(),
                     ])
                     ->columnSpanFull(),
