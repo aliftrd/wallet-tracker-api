@@ -22,7 +22,7 @@ class WalletController extends ApiController
      */
     public function index()
     {
-        $wallets = Wallet::get();
+        $wallets = Wallet::whereUserId(Auth::id())->get();
 
         return $this->resolveSuccessResponse(
             message: 'Wallets fetched successfully',

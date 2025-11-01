@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
-use App\Models\User;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\Wallet;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -10,55 +12,40 @@ class WalletPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
+    public function viewAny(AuthUser $authUser): bool
     {
-        return $user->can('ViewAny:Wallet');
+        return $authUser->can('ViewAny:Wallet');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Wallet $wallet): bool
+    public function view(AuthUser $authUser, Wallet $wallet): bool
     {
         if (request()->is('api/*')) {
-            return $user->id === $wallet->user_id && $user->can('View:Wallet');
+            return $authUser->id === $wallet->user_id && $authUser->can('View:Wallet');
         }
 
-        return $user->can('View:Wallet');
+        return $authUser->can('View:Wallet');
     }
 
-    /**
-     * Determine whether the user can create models.
-     */
-    public function create(User $user): bool
+    public function create(AuthUser $authUser): bool
     {
-        return $user->can('Create:Wallet');
+        return $authUser->can('Create:Wallet');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     */
-    public function update(User $user, Wallet $wallet): bool
+    public function update(AuthUser $authUser, Wallet $wallet): bool
     {
         if (request()->is('api/*')) {
-            return $user->id === $wallet->user_id && $user->can('Update:Wallet');
+            return $authUser->id === $wallet->user_id && $authUser->can('Update:Wallet');
         }
 
-        return $user->can('Update:Wallet');
+        return $authUser->can('Update:Wallet');
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Wallet $wallet): bool
+    public function delete(AuthUser $authUser, Wallet $wallet): bool
     {
         if (request()->is('api/*')) {
-            return $user->id === $wallet->user_id && $user->can('Delete:Wallet');
+            return $authUser->id === $wallet->user_id && $authUser->can('Delete:Wallet');
         }
 
-        return $user->can('Delete:Wallet');
+        return $authUser->can('Delete:Wallet');
     }
 }

@@ -125,10 +125,6 @@ return [
             'create',
             'update',
             'delete',
-            'restore',
-            'forceDelete',
-            'forceDeleteAny',
-            'restoreAny',
         ],
         'single_parameter_methods' => [
             'viewAny',
@@ -175,6 +171,17 @@ return [
                 'create',
                 'update',
                 'delete',
+            ],
+            \App\Filament\Resources\Users\UserResource::class => [
+                'viewAny',
+                'view',
+                'create',
+                'update',
+                'delete',
+                'restore',
+                'forceDelete',
+                'forceDeleteAny',
+                'restoreAny',
             ],
         ],
         'exclude' => [
