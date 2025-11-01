@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('user_categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->nullOnDelete();
+            $table->string('name', 50);
+            $table->string('type', 10);
+            $table->string('color', 7);
+            $table->string('icon', 10);
+            $table->timestamps();
+
+            $table->index('user_id', 'idx_user_categories_user_id');
+            $table->index('category_id', 'idx_user_categories_category_id');
+            $table->index('id', 'idx_user_categories_id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('user_categories');
+    }
+};
