@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('color', 7);
             $table->string('icon', 10);
             $table->timestamps();
+
+            $table->index('user_id', 'idx_wallets_user_id');
+            $table->index('id', 'idx_wallets_id');
         });
     }
 
