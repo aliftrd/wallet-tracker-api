@@ -7,6 +7,8 @@ use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
+use App\Filament\Resources\Users\RelationManagers\CategoriesRelationManager;
+use App\Filament\Resources\Users\RelationManagers\WalletsRelationManager;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -36,7 +38,8 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'categories' => CategoriesRelationManager::class,
+            'wallets' => WalletsRelationManager::class,
         ];
     }
 
