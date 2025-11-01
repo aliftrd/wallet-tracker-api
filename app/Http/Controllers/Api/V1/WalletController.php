@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Wallet\WalletStoreRequest;
 use App\Http\Requests\Wallet\WalletUpdateRequest;
 use App\Http\Resources\WalletResource;
@@ -9,7 +10,7 @@ use App\Models\Wallet;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
-class WalletController extends Controller
+class WalletController extends ApiController
 {
     public function __construct()
     {
@@ -21,8 +22,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $wallets = Wallet::findByCurrentUser()
-            ->get();
+        $wallets = Wallet::get();
 
         return $this->resolveSuccessResponse(
             message: 'Wallets fetched successfully',

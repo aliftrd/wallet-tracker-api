@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Enums\CategoryTypeEnum;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Category\GetCategoryRequest;
 use App\Http\Resources\UserCategoryResource;
 use App\Models\UserCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.

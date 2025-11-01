@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\V1\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
     /**
      * Handle the incoming request.
