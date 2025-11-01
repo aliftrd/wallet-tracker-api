@@ -7,6 +7,7 @@ namespace App\Models;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,6 +55,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         ];
     }
 
+    public function getAvatarAttribute(): string
+    {
+        return $this->attributes['avatar'] ?? 'https://ui-avatars.com/api/?name=' . $this->name;
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return !$this->hasRole('user');
@@ -61,6 +67,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar;
+        return $this->getAvatarAttribute();
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(UserCategory::class);
     }
 }

@@ -24,6 +24,12 @@ class UsersTable
     {
         return $table
             ->columns([
+                ImageColumn::make('avatar')
+                    ->defaultImageUrl(fn(User $record): ?string => $record->avatar)
+                    ->extraImgAttributes(fn(User $record): array => [
+                        'alt' => "{$record->name} avatar",
+                    ])
+                    ->circular(),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
@@ -34,12 +40,6 @@ class UsersTable
                     ->formatStateUsing(fn(User $record): string => Str::headline($record->roles->pluck('name')->implode(', ')))
                     ->badge()
                     ->sortable(),
-                ImageColumn::make('avatar')
-                    ->defaultImageUrl(fn(User $record): ?string => $record->avatar)
-                    ->extraImgAttributes(fn(User $record): array => [
-                        'alt' => "{$record->name} avatar",
-                    ])
-                    ->circular(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

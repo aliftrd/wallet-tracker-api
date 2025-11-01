@@ -40,11 +40,4 @@ class UserForm
                     ->columnSpanFull(),
             ]);
     }
-
-    public static function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['avatar'] = 'https://ui-avatars.com/api/?name=' . $data['name'];
-
-        return $data;
-    }
 }
