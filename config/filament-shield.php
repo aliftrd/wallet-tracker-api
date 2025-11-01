@@ -117,7 +117,7 @@ return [
 
     'policies' => [
         'path' => app_path('Policies'),
-        'merge' => true,
+        'merge' => false,
         'generate' => true,
         'methods' => [
             'viewAny',
@@ -129,8 +129,6 @@ return [
             'forceDelete',
             'forceDeleteAny',
             'restoreAny',
-            'replicate',
-            'reorder',
         ],
         'single_parameter_methods' => [
             'viewAny',
@@ -138,7 +136,6 @@ return [
             'deleteAny',
             'forceDeleteAny',
             'restoreAny',
-            'reorder',
         ],
     ],
 
