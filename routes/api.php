@@ -9,12 +9,10 @@ Route::prefix('/v1/auth')
         Route::post('/register', 'RegisterController');
     });
 
-Route::middleware('auth:sanctum')
+Route::middleware('auth:api')
     ->prefix('v1')
     ->namespace('App\Http\Controllers\Api\V1')
     ->group(function () {
-        Route::apiResources([
-            'wallets' => 'WalletController',
-            'categories' => 'CategoryController',
-        ]);
+        Route::apiResource('wallets', 'WalletController');
+        Route::apiResource('categories', 'UserCategoryController')->parameters(['categories' => 'userCategory']);
     });
