@@ -22,10 +22,10 @@ class WalletStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50',
-            'balance' => 'required|numeric',
-            'color' => 'required|string|max:7',
-            'icon' => 'required|string|max:4',
+            'name' => ['required', 'string', 'max:50'],
+            'balance' => ['required', 'numeric'],
+            'color' => ['required', 'string', 'max:7'],
+            'icon' => ['required', 'string', 'max:4'],
         ];
     }
 }
