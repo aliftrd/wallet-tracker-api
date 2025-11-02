@@ -10,6 +10,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use App\Filament\Resources\Users\RelationManagers\WalletsRelationManager;
 
 class WalletsTable
 {
@@ -18,6 +19,7 @@ class WalletsTable
         return $table
             ->columns([
                 TextColumn::make('user.name')
+                    ->hiddenOn(WalletsRelationManager::class)
                     ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),

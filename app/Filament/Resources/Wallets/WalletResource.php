@@ -18,6 +18,8 @@ class WalletResource extends Resource
 {
     protected static ?string $model = Wallet::class;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCreditCard;
     protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::CreditCard;
 

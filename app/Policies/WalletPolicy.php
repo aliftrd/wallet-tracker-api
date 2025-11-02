@@ -19,10 +19,6 @@ class WalletPolicy
 
     public function view(AuthUser $authUser, Wallet $wallet): bool
     {
-        if (request()->is('api/*')) {
-            return $authUser->id === $wallet->user_id && $authUser->can('View:Wallet');
-        }
-
         return $authUser->can('View:Wallet');
     }
 
@@ -33,19 +29,11 @@ class WalletPolicy
 
     public function update(AuthUser $authUser, Wallet $wallet): bool
     {
-        if (request()->is('api/*')) {
-            return $authUser->id === $wallet->user_id && $authUser->can('Update:Wallet');
-        }
-
         return $authUser->can('Update:Wallet');
     }
 
     public function delete(AuthUser $authUser, Wallet $wallet): bool
     {
-        if (request()->is('api/*')) {
-            return $authUser->id === $wallet->user_id && $authUser->can('Delete:Wallet');
-        }
-
         return $authUser->can('Delete:Wallet');
     }
 }
