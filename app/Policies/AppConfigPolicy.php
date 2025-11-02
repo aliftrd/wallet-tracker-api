@@ -11,7 +11,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class AppConfigPolicy
 {
     use HandlesAuthorization;
-    
+
     public function viewAny(AuthUser $authUser): bool
     {
         return $authUser->can('ViewAny:AppConfig');
@@ -36,5 +36,4 @@ class AppConfigPolicy
     {
         return $authUser->can('Delete:AppConfig');
     }
-
 }
