@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\UserCategory;
 
-use App\Enums\CategoryTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class GetCategoryRequest extends FormRequest
+class UserCategoryStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +22,7 @@ class GetCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => [
-                'required',
-                Rule::enum(CategoryTypeEnum::class),
-            ]
+            //
         ];
     }
 }

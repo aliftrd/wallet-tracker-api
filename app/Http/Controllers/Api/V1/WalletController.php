@@ -51,6 +51,8 @@ class WalletController extends ApiController
      */
     public function show(Wallet $wallet): JsonResponse
     {
+        $this->abortIfNotOwner($wallet);
+
         return $this->resolveSuccessResponse(
             message: 'Wallet fetched successfully',
             data: $wallet->toResource(),
@@ -62,6 +64,8 @@ class WalletController extends ApiController
      */
     public function update(WalletUpdateRequest $request, Wallet $wallet): JsonResponse
     {
+        $this->abortIfNotOwner($wallet);
+
         $wallet->update($request->validated());
 
         return $this->resolveSuccessResponse(
@@ -75,6 +79,8 @@ class WalletController extends ApiController
      */
     public function destroy(Wallet $wallet): JsonResponse
     {
+        $this->abortIfNotOwner($wallet);
+
         $wallet->delete();
 
         return $this->resolveSuccessResponse(
