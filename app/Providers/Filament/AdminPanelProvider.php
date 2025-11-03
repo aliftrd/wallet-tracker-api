@@ -70,6 +70,7 @@ class AdminPanelProvider extends PanelProvider
                     ]),
             ])
             ->topbar(false)
+            ->databaseTransactions()
             ->authMiddleware([
                 Authenticate::class,
             ]);
