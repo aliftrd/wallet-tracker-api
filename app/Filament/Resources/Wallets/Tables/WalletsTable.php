@@ -24,7 +24,7 @@ class WalletsTable
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('balance')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 ColorColumn::make('color'),
                 TextColumn::make('icon')
