@@ -24,7 +24,9 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user()->id)],
+            'phone_number' => ['nullable', 'string', 'max:15'],
+            'gender' => ['nullable', 'string', 'max:10'],
+            'birth_date' => ['nullable', 'date_format:Y-m-d'],
         ];
     }
 }

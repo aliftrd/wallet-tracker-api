@@ -15,10 +15,7 @@ class UpdateProfileController extends ApiController
     public function __invoke(UpdateProfileRequest $request): JsonResponse
     {
         $user = Auth::user();
-        $user->update([
-            'name' => $request->validated('name'),
-            'email' => $request->validated('email'),
-        ]);
+        $user->update($request->validated());
 
         return $this->resolveSuccessResponse(
             message: 'Profile updated successfully',
