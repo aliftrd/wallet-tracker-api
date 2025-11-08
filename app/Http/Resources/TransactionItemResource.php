@@ -6,7 +6,7 @@ use App\Traits\UseFormattedCurrency;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WalletResource extends JsonResource
+class TransactionItemResource extends JsonResource
 {
     use UseFormattedCurrency;
 
@@ -18,11 +18,10 @@ class WalletResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
             'name' => $this->name,
-            'balance' => $this->formatCurrency($this->balance),
-            'color' => $this->color,
-            'icon' => $this->icon,
+            'quantity' => $this->quantity,
+            'price' => $this->formatCurrency($this->price),
+            'total_amount' => $this->formatCurrency($this->total_amount),
         ];
     }
 }

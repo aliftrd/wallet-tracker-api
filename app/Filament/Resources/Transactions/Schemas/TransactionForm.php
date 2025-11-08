@@ -80,8 +80,7 @@ class TransactionForm
                     })
                     ->live()
                     ->searchable()
-                    ->required(fn(Get $get): bool => $get('type') !== TransactionTypeEnum::TRANSFER)
-                    ->hidden(fn(Get $get): bool => $get('type') === TransactionTypeEnum::TRANSFER),
+                    ->required(),
             ]);
     }
 

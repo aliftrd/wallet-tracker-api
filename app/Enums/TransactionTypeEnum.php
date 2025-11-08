@@ -11,14 +11,12 @@ enum TransactionTypeEnum: string implements HasLabel, HasColor, HasIcon
 {
     case INCOME = 'income';
     case EXPENSE = 'expense';
-    case TRANSFER = 'transfer';
 
     public function getLabel(): string
     {
         return match ($this) {
             self::INCOME => 'Income',
             self::EXPENSE => 'Expense',
-            self::TRANSFER => 'Transfer',
         };
     }
 
@@ -27,7 +25,6 @@ enum TransactionTypeEnum: string implements HasLabel, HasColor, HasIcon
         return match ($this) {
             self::INCOME => 'success',
             self::EXPENSE => 'danger',
-            self::TRANSFER => 'warning',
         };
     }
 
@@ -36,7 +33,6 @@ enum TransactionTypeEnum: string implements HasLabel, HasColor, HasIcon
         return match ($this) {
             self::INCOME => Heroicon::ArrowDownCircle,
             self::EXPENSE => Heroicon::ArrowUpCircle,
-            self::TRANSFER => Heroicon::ArrowRightCircle,
         };
     }
 }

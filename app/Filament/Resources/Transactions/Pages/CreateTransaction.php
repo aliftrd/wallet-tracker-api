@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Transactions\Pages;
 
-use App\Enums\TransactionTypeEnum;
 use App\Filament\Resources\Transactions\TransactionResource;
 use Filament\Resources\Pages\CreateRecord;
 
@@ -24,12 +23,6 @@ class CreateTransaction extends CreateRecord
 
     protected function afterCreate(): void
     {
-        $transaction = $this->record;
-        if ($transaction->type === TransactionTypeEnum::INCOME) {
-            $transaction->wallet->balance += $transaction->total_amount;
-        } else {
-            $transaction->wallet->balance -= $transaction->total_amount;
-        }
-        $transaction->wallet->save();
+        $this->record->applyToWallet($this->record->wallet);
     }
 }

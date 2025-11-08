@@ -58,8 +58,83 @@ class Transaction extends Model
         return $this->type === TransactionTypeEnum::INCOME;
     }
 
-    public function isTransfer(): bool
+    /**
+     * Apply this transaction to a wallet's balance
+     */
+    public function applyToWallet(Wallet $wallet): void
     {
-        return $this->type === TransactionTypeEnum::TRANSFER;
+        if ($this->isIncome()) {
+            $wallet->balance += $this->total_amount;
+        } elseif ($this->isExpense()) {
+            $wallet->balance -= $this->total_amount;
+        }
+
+        $wallet->save();
+    }
+
+    /**
+     * Revert this transaction from a wallet's balance
+     */
+    public function revertFromWallet(Wallet $wallet): void
+    {
+        if ($this->isIncome()) {
+            $wallet->balance -= $this->total_amount;
+        } elseif ($this->isExpense()) {
+            $wallet->balance += $this->total_amount;
+        }
+
+        $wallet->save();
+    }
+
+    /**
+     * Revert a transaction with specific values from a wallet's balance
+     */
+    public static function revertTransactionFromWallet(
+        Wallet $wallet,
+        TransactionTypeEnum $type,
+        float $amount
+    ): void {
+        if ($type === TransactionTypeEnum::INCOME) {
+            $wallet->balance -= $amount;
+        } elseif ($type === TransactionTypeEnum::EXPENSE) {
+            $wallet->balance += $amount;
+        }
+
+        $wallet->save();
+    }
+
+    /**
+     * Update wallet balance when transaction is modified
+     * Handles both wallet changes and amount/type changes
+     */
+    public function updateWalletBalanceOnEdit(
+        ?int $oldWalletId,
+        TransactionTypeEnum $oldType,
+        float $oldAmount
+    ): void {
+        $currentWallet = $this->wallet;
+
+        // If wallet changed, revert from old wallet and apply to new wallet
+        if ($oldWalletId && $oldWalletId != $this->wallet_id) {
+            $oldWallet = Wallet::findOrFail($oldWalletId);
+
+            // Revert from old wallet
+            self::revertTransactionFromWallet($oldWallet, $oldType, $oldAmount);
+
+            // Apply to new wallet
+            $this->applyToWallet($currentWallet);
+        } else {
+            // Same wallet, revert old values and apply new values
+            self::revertTransactionFromWallet($currentWallet, $oldType, $oldAmount);
+            $this->applyToWallet($currentWallet);
+        }
+    }
+
+    /**
+     * Update wallet balance (legacy method for backward compatibility)
+     */
+    public function updateWalletBalance(): void
+    {
+        $this->applyToWallet($this->wallet);
     }
 }

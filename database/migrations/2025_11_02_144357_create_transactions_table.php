@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('wallet_id')->constrained('wallets')->cascadeOnDelete();
-            $table->foreignId('user_category_id')->constrained('user_categories')->cascadeOnDelete();
+            $table->foreignId('user_category_id')->nullable()->constrained('user_categories')->cascadeOnDelete();
             $table->string('type', 10);
             $table->string('store_name', 50);
             $table->dateTimeTz('date');
