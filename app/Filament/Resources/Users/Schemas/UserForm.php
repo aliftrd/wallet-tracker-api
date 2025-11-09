@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Enums\GenderEnum;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
@@ -36,6 +38,15 @@ class UserForm
                             ->preload()
                             ->required()
                             ->searchable(),
+                        Select::make('gender')
+                            ->options(GenderEnum::class)
+                            ->preload()
+                            ->searchable(),
+                        DatePicker::make('birth_date'),
+                        TextInput::make('phone')
+                            ->tel()
+                            ->unique(ignoreRecord: true)
+                            ->helperText('Input your phone number in 62xxxxxxxxxx format')
                     ])
                     ->columnSpanFull(),
             ]);
