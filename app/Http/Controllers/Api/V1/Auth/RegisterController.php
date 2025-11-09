@@ -15,6 +15,8 @@ class RegisterController extends ApiController
      */
     public function __invoke(RegisterRequest $request)
     {
+        config(['auth.defaults.guard' => 'api']);
+
         $user = DB::transaction(function () use ($request) {
             $user = User::create([
                 ...$request->validated(),

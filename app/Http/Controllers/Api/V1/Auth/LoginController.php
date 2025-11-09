@@ -24,6 +24,13 @@ class LoginController extends ApiController
         }
 
         $user = Auth::user();
+        if (!$user->hasRole('user')) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Invalid credentials',
+            ]);
+        }
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return $this->resolveSuccessResponse(

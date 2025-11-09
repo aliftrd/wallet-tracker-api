@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\GenderEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UpdateProfileRequest extends FormRequest
@@ -24,8 +26,8 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'phone_number' => ['nullable', 'string', 'max:15'],
-            'gender' => ['nullable', 'string', 'max:10'],
+            'phone' => ['nullable', 'string', 'max:15', Rule::unique('users', 'phone')->ignore(Auth::id())],
+            'gender' => ['nullable', 'string', Rule::enum(GenderEnum::class)],
             'birth_date' => ['nullable', 'date_format:Y-m-d'],
         ];
     }
