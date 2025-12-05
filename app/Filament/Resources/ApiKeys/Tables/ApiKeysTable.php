@@ -32,8 +32,10 @@ class ApiKeysTable
                     ->sortable(),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->button(),
                 Action::make('regenerate')
+                    ->button()
                     ->label('Regenerate Key')
                     ->icon(Heroicon::OutlinedKey)
                     ->action(function ($record) {
@@ -49,6 +51,7 @@ class ApiKeysTable
                             ->send();
                     }),
                 DeleteAction::make()
+                    ->button()
                     ->requiresConfirmation(),
             ])
             ->toolbarActions([

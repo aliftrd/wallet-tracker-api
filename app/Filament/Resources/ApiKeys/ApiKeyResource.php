@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use UnitEnum;
 
 class ApiKeyResource extends Resource
 {
@@ -21,6 +21,9 @@ class ApiKeyResource extends Resource
     protected static string|BackedEnum|null $activeNavigationIcon = Heroicon::Key;
 
     protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $modelLabel = 'API Key';
+
+    protected static UnitEnum|string|null $navigationGroup = 'System';
 
     public static function form(Schema $schema): Schema
     {

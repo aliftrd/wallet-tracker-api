@@ -55,6 +55,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentShieldPlugin::make()
+                    ->navigationGroup('System')
+                    ->navigationLabel('Role & Permissions')
+                    ->modelLabel('Role & Permission')
+                    ->pluralModelLabel('Role & Permissions')
                     ->gridColumns([
                         'default' => 1,
                         'sm' => 2,
