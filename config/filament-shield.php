@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 return [
 
     /*
@@ -16,7 +14,7 @@ return [
     */
 
     'shield_resource' => [
-        'slug' => 'shield/roles',
+        'slug' => 'iam/roles',
         'show_model_path' => true,
         'cluster' => null,
         'tabs' => [
@@ -83,7 +81,7 @@ return [
     */
 
     'panel_user' => [
-        'enabled' => true,
+        'enabled' => false,
         'name' => 'panel_user',
     ],
 
@@ -119,11 +117,14 @@ return [
 
     'policies' => [
         'path' => app_path('Policies'),
-        'merge' => true,
+        'merge' => false,
         'generate' => true,
         'methods' => [
-            'viewAny', 'view', 'create', 'update', 'delete', 'restore',
-            'forceDelete', 'forceDeleteAny', 'restoreAny', 'replicate', 'reorder',
+            'viewAny',
+            'view',
+            'create',
+            'update',
+            'delete',
         ],
         'single_parameter_methods' => [
             'viewAny',
@@ -131,7 +132,6 @@ return [
             'deleteAny',
             'forceDeleteAny',
             'restoreAny',
-            'reorder',
         ],
     ],
 
@@ -148,7 +148,7 @@ return [
 
     'localization' => [
         'enabled' => false,
-        'key' => 'filament-shield::filament-shield.resource_permission_prefixes_labels',
+        'key' => 'filament-shield::filament-shield',
     ],
 
     /*
