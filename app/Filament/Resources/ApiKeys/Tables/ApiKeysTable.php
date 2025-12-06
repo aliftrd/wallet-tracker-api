@@ -33,10 +33,12 @@ class ApiKeysTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->button(),
+                    ->button()
+                    ->modalWidth('sm')
+                    ->color('warning'),
                 Action::make('regenerate')
                     ->button()
-                    ->label('Regenerate Key')
+                    ->color('danger')
                     ->icon(Heroicon::OutlinedKey)
                     ->action(function ($record) {
                         $record->key = ApiKeyForm::generateKey();
