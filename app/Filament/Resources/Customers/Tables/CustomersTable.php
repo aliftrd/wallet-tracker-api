@@ -41,11 +41,10 @@ class CustomersTable
             ])
             ->recordActions([
                 EditAction::make()
+                    ->button()
                     ->color('warning')
-                    ->modalWidth('sm')
-                    ->button(),
+                    ->modalWidth('sm'),
                 DeleteAction::make()
-                    ->color('danger')
                     ->button()
                     ->requiresConfirmation(),
             ])

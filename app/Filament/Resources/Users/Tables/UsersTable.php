@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
 
 class UsersTable
@@ -20,6 +21,10 @@ class UsersTable
                 TextColumn::make('email')
                     ->label('Email address')
                     ->searchable(),
+                IconColumn::make('verified')
+                    ->boolean()
+                    ->alignCenter()
+                    ->getStateUsing(fn($record) => $record->email_verified_at !== null),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
@@ -29,9 +34,13 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->button()
+                    ->color('warning')
+                    ->modalWidth('sm'),
                 DeleteAction::make()
-                    ->requiresConfirmation()
+                    ->button()
+                    ->requiresConfirmation(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
