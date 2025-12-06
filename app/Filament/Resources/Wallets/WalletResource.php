@@ -2,10 +2,7 @@
 
 namespace App\Filament\Resources\Wallets;
 
-use App\Filament\Resources\Wallets\Pages\CreateWallet;
-use App\Filament\Resources\Wallets\Pages\EditWallet;
 use App\Filament\Resources\Wallets\Pages\ListWallets;
-use App\Filament\Resources\Wallets\Pages\ViewWallet;
 use App\Filament\Resources\Wallets\Schemas\WalletForm;
 use App\Filament\Resources\Wallets\Schemas\WalletInfolist;
 use App\Filament\Resources\Wallets\Tables\WalletsTable;
