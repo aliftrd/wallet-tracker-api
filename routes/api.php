@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\V1\Auth\{
     LoginController,
     RegisterController,
     ForgotPasswordController,
+    ProfileController,
+    UpdatePasswordController,
     UpdateFcmTokenController,
     LogoutController,
 };
@@ -17,7 +19,9 @@ Route::middleware('api-key')
         Route::post('forgot-password', ForgotPasswordController::class);
 
         Route::middleware('auth:api')->group(function () {
-            // Route::get('me', GetMeController::class);
+            Route::get('me', [ProfileController::class, 'show']);
+            Route::match(['put', 'patch'], 'me', [ProfileController::class, 'update']);
+            Route::match(['put', 'patch'], 'me/password', UpdatePasswordController::class);
             Route::match(['put', 'patch'], 'me/fcm-token', UpdateFcmTokenController::class);
             Route::delete('logout', LogoutController::class);
         });
