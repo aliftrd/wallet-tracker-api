@@ -40,6 +40,6 @@ class RegisterController extends ApiController
 
         // TODO: Send welcome email
 
-        return $this->resolveSuccessResponse('Customer registered successfully', data: $customer->toResource());
+        return $this->resolveSuccessResponse('Customer registered successfully', data: $customer->toResource(), status: 201);
     }
 }
