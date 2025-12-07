@@ -13,8 +13,9 @@ class ApiKey extends Model
         'status'
     ];
 
-    public function scopeActive($query): Builder
+    public function scopeFindActiveKey($query, string $key): Builder
     {
-        return $query->where('status', true);
+        return $query->where('key', $key)
+            ->where('status', true);
     }
 }
