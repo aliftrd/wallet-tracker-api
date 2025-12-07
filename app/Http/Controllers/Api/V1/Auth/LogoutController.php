@@ -9,7 +9,6 @@ class LogoutController extends ApiController
 {
     public function __invoke(Request $request)
     {
-        dd($request->user());
         $request->user()->currentAccessToken()->delete();
     }
 }
