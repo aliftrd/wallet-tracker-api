@@ -15,6 +15,7 @@ class Customer extends Authenticatable
         'name',
         'email',
         'password',
+        'fcm_token',
     ];
 
     protected $hidden = [
