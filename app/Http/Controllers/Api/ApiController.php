@@ -20,7 +20,7 @@ abstract class ApiController extends BaseController
 
     protected function abortIfNotOwner(Model $model): void
     {
-        throw_if($model->user_id !== Auth::id(), AuthorizationException::class);
+        throw_if($model->customer_id !== Auth::id(), AuthorizationException::class);
     }
 
     protected function resolveSuccessResponse(string $message, array|JsonResource|Collection|null $data = null, Response | int $status = Response::HTTP_OK): JsonResponse
