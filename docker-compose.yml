@@ -37,15 +37,17 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
+    # Untuk PRODUCTION sebaiknya disable port mapping DB
     ports:
       - "${DB_PORT}:5432"
     volumes:
       - waltrack-data:/var/lib/postgresql/data
     networks:
       - waltrack-network
+
 networks:
   waltrack-network:
-  waltrack: bridge
+    driver: bridge
 
 volumes:
   waltrack-data:
