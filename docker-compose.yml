@@ -1,5 +1,4 @@
 services:
-  # PHP Service
   app:
     build:
       context: .
@@ -9,11 +8,9 @@ services:
     working_dir: /var/www
     volumes:
       - ./:/var/www
-      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - waltrack-network
 
-  # Nginx Service
   nginx:
     image: nginx:alpine
     container_name: laravel_nginx
@@ -22,11 +19,12 @@ services:
       - "80:80"
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
     networks:
       - waltrack-network
 
-  # PostgreSQL Service
   db:
     image: postgres:16-trixie
     container_name: waltrack_db
@@ -35,9 +33,6 @@ services:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      SERVICE_TAGS: dev
-      SERVICE_NAME: postgres
-    # Untuk PRODUCTION sebaiknya disable port mapping DB
     ports:
       - "${DB_PORT}:5432"
     volumes:
